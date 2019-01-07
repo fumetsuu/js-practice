@@ -1,0 +1,23 @@
+const { assert, cmpArr } = require('../util')
+
+const HashTable = require('./hash_table')
+
+var hashTable = new HashTable(5)
+
+hashTable.set('key1', 'val1')
+hashTable.set('key2', 'val2')
+hashTable.set('key3', 'val3')
+assert(hashTable.contains('key1'), 'contains test 1 ')
+assert(!hashTable.contains('key4'), 'contains test 2 ')
+hashTable.delete('key2')
+assert(!hashTable.contains('key2'), 'delete and contains test ')
+assert(hashTable.get('key3') == 'val3', 'get test 1 ')
+hashTable.set('key4', 'val4')
+hashTable.set('key5', 'val5')
+hashTable.set('key6', 'val6')
+hashTable.set('key7', 'val7')
+hashTable.set('key8', 'val8')
+assert(hashTable.get('key6') == 'val6', 'get test 2 ')
+assert(cmpArr(hashTable.getKeys(), ['key1', 'key3', 'key4', 'key5', 'key6', 'key7', 'key8']), 'get keys test ')
+hashTable.set('key6', 'val six')
+assert(hashTable.get('key6')  == 'val six', 'set update test ')

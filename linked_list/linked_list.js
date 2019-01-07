@@ -102,19 +102,31 @@ module.exports = class LinkedList {
 		this.size--
 		return true
 	}
-
-	//return the node object of the node with the given val, null if non existent
-	find(val) {
+	
+	//return the node that passes the cb test, null if non existent
+	find(cb) {
 		if(!this.head) return null
 		var cNode = this.head
 		while(cNode) {
-			if(cNode.val == val) {
+			if(cb(cNode.val)) {
 				return cNode
 			}
 			cNode = cNode.next
 		}
 		return null
 	}
+
+	// find(val) {
+	// 	if(!this.head) return null
+	// 	var cNode = this.head
+	// 	while(cNode) {
+	// 		if(cNode.val == val) {
+	// 			return cNode
+	// 		}
+	// 		cNode = cNode.next
+	// 	}
+	// 	return null
+	// }
 
 	reverse() {
 		if(this.size < 2) return true
