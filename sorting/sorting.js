@@ -87,6 +87,17 @@ function mergeSort(arr) {
 	return merged
 }
 
+const Heap = require('../heap/max_heap')
+function heapSort(arr) {
+	var sortedArr = new Array(arr.length)
+	var heap = new Heap()
+	heap.heapify(arr)
+	for(var i = sortedArr.length - 1; i >= 0; i--) {
+		sortedArr[i] = heap.pop()
+	}
+	return sortedArr
+}
+
 function quickSort(arr, l, h) {
 	if(l < h) {
 		var p = partition(arr, l, h) //put all elements lower than the pivot below the pivot and all elements higher than the pivot above the pivot
@@ -135,6 +146,7 @@ module.exports = {
 	insertionSort,
 	selectionSort,
 	mergeSort,
+	heapSort,
 	quickSort,
 	bubbleSort
 }

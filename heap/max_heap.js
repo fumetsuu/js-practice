@@ -78,9 +78,20 @@ module.exports = class MaxHeap {
 	}
 
 	siftDown(n) {
-		if((!this.getLeftChild(n) || this.nodes[n] > this.getLeftChild(n)) && (!this.getLeftChild(n) || this.nodes[n] > this.getRightChild(n))) return
-		//determine which child is higher than n
-		var higherChildIndex = this.getLeftChild(n) > this.getRightChild(n) ? this.getLeftChildIndex(n) : this.getRightChildIndex(n)
+
+		var leftChild = this.getLeftChild(n)
+		var rightChild = this.getRightChild(n)
+		var higherChildIndex
+		
+		if((leftChild == undefined || this.nodes[n] >= leftChild) && (rightChild == undefined || this.nodes[n] >= rightChild)) return false
+
+		if((leftChild != undefined && this.nodes[n] < leftChild) && (rightChild == undefined || this.nodes[n] >= rightChild)) {
+			higherChildIndex = this.getLeftChildIndex(n)
+		} else if((rightChild != undefined && this.nodes[n] < rightChild) && (leftChild == undefined || this.nodes[n] >= leftChild)) {
+			higherChildIndex = this.getRightChildIndex(n)
+		} else {
+			higherChildIndex = leftChild > rightChild ? this.getLeftChildIndex(n) : this.getRightChildIndex(n)
+		}
 		this.swapNodes(n, higherChildIndex)
 		//now sift up again at the higher child's index (where n now resides)
 		this.siftDown(higherChildIndex)
@@ -95,7 +106,7 @@ module.exports = class MaxHeap {
 	getLeftChildIndex(n) { return 2*n + 1 }
 	getRightChildIndex(n) { return 2*n + 2 }
 	getParentIndex(n) { return Math.floor((n-1)/2) }
-	getLeftChild(n) { return this.nodes[this.getLeftChildIndex(n)] || null }
-	getRightChild(n) { return this.nodes[this.getRightChildIndex(n)] || null }
-	getParent(n) { return this.nodes[this.getParentIndex(n)] || null }
+	getLeftChild(n) { return this.nodes[this.getLeftChildIndex(n)] }
+	getRightChild(n) { return this.nodes[this.getRightChildIndex(n)] }
+	getParent(n) { return this.nodes[this.getParentIndex(n)] }
 }

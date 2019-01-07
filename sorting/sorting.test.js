@@ -1,6 +1,6 @@
 const { assert, cmpArr } = require('../util')
 
-const { insertionSort, selectionSort, mergeSort, quickSort, bubbleSort } = require('./sorting')
+const { insertionSort, selectionSort, mergeSort, heapSort, quickSort, bubbleSort } = require('./sorting')
 
 //insertion sort
 assert(cmpArr(insertionSort([5,3,9,8,22,13,7,1]), [1,3,5,7,8,9,13,22]), 'insertion sort 1 test ')
@@ -14,7 +14,9 @@ assert(cmpArr(selectionSort([5,-3,2,0,11]), [-3,0,2,5,11]), 'selection sort 2 te
 assert(cmpArr(mergeSort([5,3,9,8,22,13,7,1]), [1,3,5,7,8,9,13,22]), 'merge sort 1 test ')
 assert(cmpArr(mergeSort([5,-3,2,0,11]), [-3,0,2,5,11]), 'merge sort 2 test ')
 
-//heap sort TO BE DONE
+//heap sort
+assert(cmpArr(heapSort([5,3,9,8,22,13,7,1]), [1,3,5,7,8,9,13,22]), 'heap sort 1 test ')
+assert(cmpArr(heapSort([5,-3,2,0,11]), [-3,0,2,5,11]), 'heap sort 2 test ')
 
 //quick sort
 var qstest1 = [5,3,9,8,22,13,7,1]
