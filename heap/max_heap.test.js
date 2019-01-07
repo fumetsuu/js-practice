@@ -1,0 +1,27 @@
+const { assert, cmpArr } = require('../util')
+
+const MaxHeap = require('./max_heap')
+
+var maxHeap = new MaxHeap()
+
+maxHeap.insert(44)
+assert(maxHeap.findMax() == 44, 'insert and find max ')
+
+maxHeap.insert(33)
+maxHeap.insert(22)
+assert(cmpArr(maxHeap.toArrayRepresentation(), [44, 33, 22]), 'insert and sift test 1 ')
+maxHeap.insert(55)
+assert(cmpArr(maxHeap.toArrayRepresentation(), [55, 44, 22, 33]), 'insert and sift test 2 ')
+maxHeap.insert(66)
+assert(cmpArr(maxHeap.toArrayRepresentation(), [66, 55, 22, 33, 44]), 'insert and sift test 3 ')
+assert(maxHeap.pop() == 66, 'pop test ')
+console.log(maxHeap.toString())
+assert(cmpArr(maxHeap.toArrayRepresentation(), [55, 44, 22, 33]), 'pop and sift test ')
+maxHeap.insert(25)
+maxHeap.insert(39)
+maxHeap.insert(12)
+assert(cmpArr(maxHeap.toArrayRepresentation(), [55, 44, 39, 33, 25, 22, 12]), 'insert and sift test 4 ')
+assert(maxHeap.find(25) == 4, 'find test ')
+maxHeap.delete(44)
+assert(cmpArr(maxHeap.toArrayRepresentation(), [55, 33, 39, 12, 25, 22]), 'remove and sift test ')
+assert(cmpArr(maxHeap.heapify([41,190,2,24,39,11,152,19,88,64,72,4,7,2,51]), [190, 152, 51, 88, 72, 11, 41, 19, 24, 64, 39, 4, 7, 2, 2]), 'heapify test ')
