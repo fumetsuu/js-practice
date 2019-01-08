@@ -12,6 +12,36 @@ module.exports = class Graph {
 		return Object.keys(this.vertices).map(vKey => this.vertices[vKey])
 	}
 
+	getNeighbours(vertex) {
+		return vertex.getNeighbours().filter(vNeighbour => this.getEdge(vertex.key, vNeighbour.key))
+	}
+	
+	hasNeighbour(v1, v2) {
+		return this.getNeighbours(v1).includes(v2)
+	}
+
+	closesCycle(edge) {
+		var sV = edge.startVertex
+		var eV = edge.endVertex
+		
+		const closesCycleRecursive = (cV, visited) => {
+			visited.push(cV.key)
+			var neighbours = this.getNeighbours(cV)
+
+			neighbours.forEach(neighbour => {
+				if(!visited.includes(neighbour.key)) {
+					return closesCycleRecursive(neighbour, visited)
+				}
+			})
+
+			return visited
+		}
+
+		return closesCycleRecursive(sV, []).includes(eV.key)
+
+	}
+
+
 	getEdges() {
 		return Object.keys(this.edges).map(eKey => this.edges[eKey])
 	}
@@ -133,6 +163,24 @@ module.exports = class Graph {
 			aM.push(row)
 		}
 		return aM
+	}
+
+	printAdjacencyMatrix() {
+		var aM = this.getAdjacencyMatrix()
+		var vKeys = Object.keys(this.vertices)
+		var aMString = '-  | '
+		for(var h = 0; h < vKeys.length; h++) {
+			aMString += vKeys[h] + ' | '
+		}
+		aMString += '\n'
+		for(var v = 0; v < vKeys.length; v++) {
+			aMString += vKeys[v] + ' | '
+			for(var i = 0; i < vKeys.length; i++) {
+				aMString += aM[v][i] + ' | '
+			}
+			aMString += '\n'
+		}
+		console.log(aMString)
 	}
 
 }

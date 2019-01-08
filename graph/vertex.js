@@ -20,6 +20,10 @@ module.exports = class Vertex {
 		return Object.keys(this.edges).map(key => this.edges[key])
 	}
 
+	hasNeighbour(vertex) {
+		return this.getNeighbours().includes(vertex)
+	}
+
 	getNeighbours() {
 		return Object.keys(this.edges).map(key => {
 			var edge = this.edges[key]
