@@ -8,6 +8,14 @@ module.exports = class Graph {
 		this.isDirected = isDirected
 	}
 
+	getVertices() {
+		return Object.keys(this.vertices).map(vKey => this.vertices[vKey])
+	}
+
+	getEdges() {
+		return Object.keys(this.edges).map(eKey => this.edges[eKey])
+	}
+
 	addVertices(vertices) {
 		const addVertex = vertex => {
 			this.vertices[vertex.key] = vertex

@@ -1,6 +1,7 @@
 module.exports = class Vertex {
-	constructor(key) {
+	constructor(key, val=null) {
 		this.key = key
+		this.val = val
 		this.edges = {}
 	}
 

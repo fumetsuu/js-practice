@@ -21,6 +21,10 @@ module.exports = class Queue {
 		return this.size
 	}
 
+	isEmpty() {
+		return this.size == 0
+	}
+
 	enqueue(val) {
 		//queue is full
 		if(this.capacity > 0 && this.size == this.capacity) {
@@ -47,12 +51,13 @@ module.exports = class Queue {
 	dequeue() {
 		if(!this.front) {
 			console.log('error, queue is empty (can\'t dequeue)')
-			return false
+			return null
 		}
 		//point this.front to what was previously the 2nd item in queue
+		var poppedItem = this.front.val
 		this.front = this.front.next
 		this.size--
-		return true
+		return poppedItem
 	}
 
 	peek() {
