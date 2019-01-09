@@ -22,7 +22,7 @@ var eBE = new Edge(vB, vE, 7)
 var eCE = new Edge(vC, vE, 5)
 var eDE = new Edge(vD, vE, 15)
 var eDF = new Edge(vD, vF, 6)
-var eEF = new Edge(vE, vG, 8)
+var eEF = new Edge(vE, vF, 8)
 var eEG = new Edge(vE, vG, 9)
 var eFG = new Edge(vF, vG, 11)
 
