@@ -42,8 +42,12 @@ module.exports = class Graph {
 	}
 
 
-	getEdges() {
-		return Object.keys(this.edges).map(eKey => this.edges[eKey])
+	getEdges(vertex = null) {
+		if(vertex == null) return Object.keys(this.edges).map(eKey => this.edges[eKey])
+		return Object.keys(this.edges).filter(eKey => {
+			var edge = this.edges[eKey]
+			return edge.startVertex == vertex || edge.endVertex == vertex
+		}).map(eKey => this.edges[eKey])
 	}
 
 	addVertices(vertices) {
