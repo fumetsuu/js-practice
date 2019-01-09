@@ -46,7 +46,8 @@ module.exports = class Graph {
 		if(vertex == null) return Object.keys(this.edges).map(eKey => this.edges[eKey])
 		return Object.keys(this.edges).filter(eKey => {
 			var edge = this.edges[eKey]
-			return edge.startVertex == vertex || edge.endVertex == vertex
+			if(!this.isDirected) return edge.startVertex == vertex || edge.endVertex == vertex
+			if(this.isDirected) return edge.startVertex == vertex
 		}).map(eKey => this.edges[eKey])
 	}
 
